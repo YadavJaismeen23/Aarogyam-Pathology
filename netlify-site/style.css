@@ -1,0 +1,42 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
+  
+  .navbar {
+    background: #0b6fa4;
+    padding: 15px;
+    color: white;
+  }
+  
+  .navbar .logo {
+    font-size: 22px;
+    font-weight: bold;
+  }
+  
+  .navbar nav a {
+    color: white;
+    margin-left: 15px;
+    text-decoration: none;
+  }
+  
+  .cta {
+    background: #2ecc71;
+    padding: 6px 12px;
+    border-radius: 4px;
+  }
+  
+  .hero {
+    padding: 80px;
+    text-align: center;
+    background: linear-gradient(to right, #0b6fa4, #1abc9c);
+    color: white;
+  }
+  
+  .footer {
+    background: #0b6fa4;
+    color: white;
+    text-align: center;
+    padding: 15px;
+  }
+  

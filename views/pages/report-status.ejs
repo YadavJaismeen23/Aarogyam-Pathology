@@ -1,0 +1,47 @@
+<%- include("../layout/header") %>
+
+<section class="page-header">
+  <div class="container">
+    <h1>Check Your Report</h1>
+    <p>Enter your Report ID or Phone Number</p>
+  </div>
+</section>
+
+<section class="report-check">
+  <div class="container">
+    <form method="POST" action="/report-status">
+        <input
+          type="text"
+          name="searchValue"
+          placeholder="Enter Report ID or Phone Number"
+          required
+        >
+        <button type="submit" class="btn-primary">Check Status</button>
+      </form>
+      
+      <% if (error) { %>
+        <p style="color:red; margin-top:20px;"><%= error %></p>
+      <% } %>
+      
+      <% if (report) { %>
+        <div class="report-result">
+          <h3>Report Found ✅</h3>
+          <p><strong>Patient:</strong> <%= report.patientName %></p>
+          <p><strong>Test:</strong> <%= report.testName %></p>
+          <p><strong>Report ID:</strong> <%= report.reportId %></p>
+      
+          <a href="<%= report.filePath %>" class="btn-primary" download>
+            Download Report (PDF)
+          </a>
+        </div>
+      <% } %>
+      
+
+    <!-- Result placeholder -->
+    <div class="report-result">
+      <p>No report checked yet.</p>
+    </div>
+  </div>
+</section>
+
+<%- include("../layout/footer") %>

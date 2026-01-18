@@ -1,0 +1,24 @@
+<%- include("../layout/header") %>
+
+<section class="page-header">
+  <div class="container">
+    <h1>Upload Patient Report</h1>
+  </div>
+</section>
+
+<section class="report-check">
+  <div class="container">
+    <form method="POST" action="/admin/upload" enctype="multipart/form-data">
+
+      <input type="text" name="patientName" placeholder="Patient Name" required>
+      <input type="text" name="phone" placeholder="Phone Number" required>
+      <input type="text" name="testName" placeholder="Test Name" required>
+
+      <input type="file" name="reportPdf" accept="application/pdf" required>
+
+      <button type="submit" class="btn-primary">Upload Report</button>
+    </form>
+  </div>
+</section>
+
+<%- include("../layout/footer") %>
