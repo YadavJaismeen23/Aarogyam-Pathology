@@ -1,5 +1,6 @@
 const express = require("express");
 const path = require("path");
+const cors = require("cors");
 const sessionConfig = require("./config/session");
 
 const app = express();
@@ -16,7 +17,22 @@ app.set("views", path.join(__dirname, "views"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Static files
+/* -------------------------
+   CORS (Netlify → Render)
+-------------------------- */
+app.use(
+  cors({
+    origin: [
+      "https://aarogyamlifecare.com",
+      "https://www.aarogyamlifecare.com"
+    ],
+    credentials: true
+  })
+);
+
+/* -------------------------
+   Static Files
+-------------------------- */
 app.use(express.static(path.join(__dirname, "public")));
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
@@ -26,7 +42,7 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use(sessionConfig);
 
 /* -------------------------
-   Health Check (Render needs this)
+   Health Check (Render)
 -------------------------- */
 app.get("/health", (req, res) => {
   res.status(200).send("OK");
