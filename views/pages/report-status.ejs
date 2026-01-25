@@ -1,46 +1,61 @@
 <%- include("../layout/header") %>
 
+<!-- ================= PAGE HEADER ================= -->
 <section class="page-header">
   <div class="container">
-    <h1>Check Your Report</h1>
-    <p>Enter your Report ID or Phone Number</p>
+    <h1 data-i18n="reportTitle">Check Your Report</h1>
+    <p data-i18n="reportSubtitle">
+      Enter your Report ID or registered Phone Number
+    </p>
   </div>
 </section>
 
+<!-- ================= REPORT CHECK ================= -->
 <section class="report-check">
   <div class="container">
-    <form method="POST" action="/report-status">
+
+    <div class="report-card">
+
+      <!-- FORM -->
+      <form method="POST" action="https://aarogyam-pathology.onrender.com/report-status" class="report-form">
+        <label data-i18n="reportLabel">Report ID / Phone Number</label>
+
         <input
           type="text"
           name="searchValue"
-          placeholder="Enter Report ID or Phone Number"
+          placeholder="Eg: A12B34CD or 98XXXXXXXX"
           required
         >
-        <button type="submit" class="btn-primary">Check Status</button>
+
+        <button type="submit" class="btn-primary full-width">
+          🔍 <span data-i18n="checkStatus">Check Report Status</span>
+        </button>
       </form>
-      
+
+      <!-- ERROR -->
       <% if (error) { %>
-        <p style="color:red; margin-top:20px;"><%= error %></p>
+        <div class="report-error">
+          ❌ <%= error %>
+        </div>
       <% } %>
-      
+
+      <!-- SUCCESS -->
       <% if (report) { %>
-        <div class="report-result">
-          <h3>Report Found ✅</h3>
-          <p><strong>Patient:</strong> <%= report.patientName %></p>
-          <p><strong>Test:</strong> <%= report.testName %></p>
-          <p><strong>Report ID:</strong> <%= report.reportId %></p>
-      
+        <div class="report-result success">
+          <h3>✅ <span data-i18n="reportFound">Report Found</span></h3>
+
+          <p><strong data-i18n="patient">Patient:</strong> <%= report.patientName %></p>
+          <p><strong data-i18n="test">Test:</strong> <%= report.testName %></p>
+          <p><strong data-i18n="reportId">Report ID:</strong> <%= report.reportId %></p>
+
           <a href="<%= report.filePath %>" class="btn-primary" download>
-            Download Report (PDF)
+            📄 <span data-i18n="downloadReport">Download Report (PDF)</span>
           </a>
         </div>
       <% } %>
-      
 
-    <!-- Result placeholder -->
-    <div class="report-result">
-      <p>No report checked yet.</p>
     </div>
+
   </div>
 </section>
 

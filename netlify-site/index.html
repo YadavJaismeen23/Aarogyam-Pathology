@@ -1,34 +1,67 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
   <title>Aarogyam Lifecare</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
-
-<header class="navbar">
-  <div class="container">
-    <div class="logo">Aarogyam Lifecare</div>
-    <nav>
-      <a href="#">Home</a>
-      <a href="#">Tests</a>
-      <a href="#">About</a>
-      <a href="#">Contact</a>
-      <a class="cta" href="https://wa.me/919821220304">Book Test</a>
-    </nav>
-  </div>
-</header>
-
-<section class="hero">
-  <h1>Trusted Diagnostic & Pathology Services</h1>
-  <p>Fast • Accurate • Doorstep Sample Collection</p>
-</section>
-
-<footer class="footer">
-  <p>© 2026 Aarogyam Lifecare Diagnostic Centre</p>
-</footer>
+    <header class="navbar">
+        <div class="container nav-flex">
+      
+          <!-- HAMBURGER (MOBILE ONLY) -->
+          <div class="hamburger" onclick="openMenu()">☰</div>
+      
+          <!-- LOGO -->
+          <div class="logo">
+            <img src="/images/Aarogyam-Logo.jpeg" alt="Aarogyam Lifecare">
+            <div>
+              <h1> By <b>Motichand</b> Hospital</h1>
+              <small>Diagnostic & Pathology Centre</small>
+            </div>
+          </div>
+      
+          <!-- DESKTOP NAV -->
+          <nav class="desktop-nav">
+            <a href="/">Home</a>
+            <a href="/tests">Tests</a>
+            <a href="/about">About</a>
+            <a href="/contact">Contact</a>
+            <a class="cta" href="https://wa.me/919821220304">Book Test</a>
+          </nav>
+      
+        </div>
+      </header>
+      
+      <!-- MOBILE SIDEBAR -->
+      <div id="mobileSidebar" class="mobile-sidebar">
+        <span class="close-btn" onclick="closeMenu()">×</span>
+      
+        <a href="/">Home</a>
+        <a href="/tests">Tests</a>
+        <a href="/about">About</a>
+        <a href="/contact">Contact</a>
+      
+        <a class="mobile-cta" href="https://wa.me/919821220304">
+          📲 Book Test
+        </a>
+      </div>
+      
+      <!-- OVERLAY -->
+      <div id="overlay" onclick="closeMenu()"></div>
+      <script>
+        function openMenu() {
+          document.getElementById("mobileSidebar").style.left = "0";
+          document.getElementById("overlay").style.display = "block";
+        }
+      
+        function closeMenu() {
+          document.getElementById("mobileSidebar").style.left = "-260px";
+          document.getElementById("overlay").style.display = "none";
+        }
+      </script>
+      
+  <!-- HERO SECTION -->
+  <!-- paste Trusted Diagnostic & Pathology section -->
 
 </body>
 </html>

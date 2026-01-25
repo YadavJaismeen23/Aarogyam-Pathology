@@ -1,0 +1,271 @@
+<%- include("../layout/header") %>
+
+<!-- PAGE HEADER -->
+<section class="page-header">
+  <div class="container">
+    <h1 data-i18n="bookTitle">Referral & Test Request Form</h1>
+    <p data-i18n="bookSubtitle">
+      Accurate Reports • Fast Turnaround • Doorstep Sample Collection
+    </p>
+  </div>
+</section>
+
+<section class="form-section">
+  <div class="container">
+
+    <!-- BRAND INFO -->
+    <div class="form-brand">
+      <h2>Aarogyam Lifecare</h2>
+      <p data-i18n="brandTagline">Diagnostic & Pathology Centre</p>
+
+      <div class="brand-meta">
+        <span>📞 9821220304</span>
+        <span data-i18n="homeCollectionInfo">
+          🚚 Doorstep Sample Collection Available
+        </span>
+      </div>
+    </div>
+
+    <!-- FORM -->
+    <form id="testForm" class="medical-form">
+
+      <!-- ================= PATIENT DETAILS ================= -->
+      <fieldset>
+        <legend data-i18n="patientDetails">Patient Details</legend>
+
+        <div class="form-grid">
+          <div>
+            <label for="name" data-i18n="patientName">Patient Name</label>
+            <input type="text" id="name" name="name" required>
+          </div>
+
+          <div>
+            <label for="ageSex" data-i18n="ageSex">Age / Sex</label>
+            <input type="text" id="ageSex" name="ageSex" placeholder="Eg: 32 / F">
+          </div>
+
+          <div>
+            <label for="phone" data-i18n="phoneNumber">Phone Number</label>
+            <input type="tel" id="phone" name="phone" required>
+          </div>
+
+          <div>
+            <label for="date" data-i18n="date">Date</label>
+            <input type="date" id="date" name="date">
+          </div>
+        </div>
+
+        <label for="address" data-i18n="address">Address</label>
+        <textarea id="address" name="address" rows="2" required></textarea>
+      </fieldset>
+
+      <!-- ================= REFERRED BY ================= -->
+      <fieldset>
+        <legend data-i18n="referredBy">Referred By</legend>
+
+        <div class="form-grid">
+          <div>
+            <label for="referredBy" data-i18n="refByLabel">
+              Doctor / ASHA / Pharmacist
+            </label>
+            <input type="text" id="referredBy" name="referredBy">
+          </div>
+
+          <div>
+            <label for="refContact" data-i18n="contact">Contact</label>
+            <input type="text" id="refContact" name="refContact">
+          </div>
+        </div>
+      </fieldset>
+
+      <!-- ================= CHIEF COMPLAINTS ================= -->
+      <fieldset>
+        <legend data-i18n="chiefComplaints">Chief Complaints</legend>
+
+        <div class="checkbox-grid">
+          <label><input type="checkbox" value="Fever"> <span data-i18n="cFever">Fever</span></label>
+          <label><input type="checkbox" value="Cough"> <span data-i18n="cCough">Cough</span></label>
+          <label><input type="checkbox" value="Vomiting"> <span data-i18n="cVomiting">Vomiting</span></label>
+          <label><input type="checkbox" value="Weakness"> <span data-i18n="cWeakness">Weakness</span></label>
+          <label><input type="checkbox" value="Weight Loss"> <span data-i18n="cWeightLoss">Weight Loss</span></label>
+          <label><input type="checkbox" value="Diabetes Symptoms"> <span data-i18n="cDiabetes">Diabetes Symptoms</span></label>
+          <label><input type="checkbox" value="Thyroid Symptoms"> <span data-i18n="cThyroid">Thyroid Symptoms</span></label>
+          <label><input type="checkbox" value="Abdominal Pain"> <span data-i18n="cAbdominal">Abdominal Pain</span></label>
+        </div>
+      </fieldset>
+
+      <!-- ================= TESTS REQUESTED ================= -->
+      <fieldset>
+        <legend data-i18n="testsRequested">Tests Requested</legend>
+        <!-- Test names stay English -->
+        <div class="checkbox-grid">
+          <label><input type="checkbox" value="CBC"> CBC</label>
+          <label><input type="checkbox" value="LFT"> LFT</label>
+          <label><input type="checkbox" value="KFT"> KFT</label>
+          <label><input type="checkbox" value="Thyroid Profile"> Thyroid Profile</label>
+          <label><input type="checkbox" value="HbA1c"> HbA1c</label>
+          <label><input type="checkbox" value="Dengue"> Dengue</label>
+          <label><input type="checkbox" value="Malaria"> Malaria</label>
+          <label><input type="checkbox" value="Typhoid"> Typhoid</label>
+          <label><input type="checkbox" value="Urine Routine"> Urine Routine</label>
+          <label><input type="checkbox" value="Pregnancy Test"> Pregnancy Test</label>
+        </div>
+      </fieldset>
+
+      <!-- ================= REPORT DELIVERY ================= -->
+      <fieldset>
+        <legend data-i18n="reportDelivery">Report Delivery</legend>
+
+        <div class="checkbox-grid">
+          <label>
+            <input type="radio" name="delivery" value="WhatsApp" required>
+            WhatsApp
+          </label>
+          <label>
+            <input type="radio" name="delivery" value="Patient Pickup">
+            <span data-i18n="patientPickup">Patient Pickup</span>
+          </label>
+          <label>
+            <input type="radio" name="delivery" value="Home Delivery">
+            <span data-i18n="homeDelivery">Home Delivery</span>
+          </label>
+        </div>
+      </fieldset>
+
+      <!-- ================= SUBMIT ================= -->
+      <button type="submit" class="btn-primary full-width">
+        <span data-i18n="proceedWhatsapp">Proceed to WhatsApp</span>
+      </button>
+
+    </form>
+  </div>
+</section>
+
+<%- include("../layout/footer") %>
+
+
+<!-- ================= WHATSAPP AUTO MESSAGE SCRIPT ================= -->
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+  
+    const form = document.getElementById("testForm");
+    if (!form) return;
+  
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+  
+      /* ================= LANGUAGE ================= */
+      const lang = localStorage.getItem("siteLang") || "en";
+  
+      const labels = {
+        en: {
+          greeting: "Hello Aarogyam Lifecare,",
+          title: "Referral & Test Request",
+          patient: "Patient Details",
+          referred: "Referred By",
+          complaints: "Chief Complaints",
+          tests: "Tests Requested",
+          delivery: "Report Delivery",
+          notMentioned: "Not mentioned",
+          notSelected: "Not selected",
+          confirm: "Please confirm sample collection & timing."
+        },
+        hi: {
+          greeting: "नमस्ते आरोग्यम लाइफकेयर,",
+          title: "रेफरल एवं जांच अनुरोध",
+          patient: "मरीज विवरण",
+          referred: "रेफर किया गया",
+          complaints: "मुख्य शिकायतें",
+          tests: "मांगी गई जांच",
+          delivery: "रिपोर्ट डिलीवरी",
+          notMentioned: "उल्लेख नहीं किया गया",
+          notSelected: "चयनित नहीं",
+          confirm: "कृपया सैंपल कलेक्शन और समय की पुष्टि करें।"
+        }
+      };
+  
+      const L = labels[lang];
+  
+      /* ================= FORM VALUES ================= */
+      const name = document.getElementById("name").value;
+      const ageSex = document.getElementById("ageSex").value;
+      const phone = document.getElementById("phone").value;
+      const address = document.getElementById("address").value;
+      const referredBy =
+        document.getElementById("referredBy").value || "Self";
+  
+      const complaints = Array.from(
+        document.querySelectorAll(
+          'fieldset:nth-of-type(3) input[type="checkbox"]:checked'
+        )
+      ).map(el => el.value);
+  
+      const tests = Array.from(
+        document.querySelectorAll(
+          'fieldset:nth-of-type(4) input[type="checkbox"]:checked'
+        )
+      ).map(el => el.value);
+  
+      const delivery = document.querySelector(
+        'input[name="delivery"]:checked'
+      ).value;
+  
+      /* ================= SEND EMAIL (NON-BLOCKING) ================= */
+      fetch("/send-booking-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          lang,
+          formData: {
+            name,
+            ageSex,
+            phone,
+            address,
+            referredBy,
+            complaints,
+            tests,
+            delivery
+          }
+        })
+      }).catch(() => {
+        // silent fail – WhatsApp still opens
+      });
+  
+      /* ================= WHATSAPP MESSAGE ================= */
+      const message = `
+  ${L.greeting}
+  
+  📄 *${L.title}*
+  
+  👤 *${L.patient}*
+  Name: ${name}
+  Age/Sex: ${ageSex}
+  Phone: ${phone}
+  Address: ${address}
+  
+  👨‍⚕️ *${L.referred}*
+  ${referredBy}
+  
+  🩺 *${L.complaints}*
+  ${complaints.length ? complaints.map(c => "• " + c).join("\n") : "• " + L.notMentioned}
+  
+  🧪 *${L.tests}*
+  ${tests.length ? tests.map(t => "• " + t).join("\n") : "• " + L.notSelected}
+  
+  📦 *${L.delivery}*
+  ${delivery}
+  
+  ${L.confirm}
+  `;
+  
+      const whatsappURL =
+        "https://wa.me/919821220304?text=" +
+        encodeURIComponent(message.trim());
+  
+      window.open(whatsappURL, "_blank");
+    });
+  
+  });
+  </script>
+  
+  

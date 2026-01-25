@@ -1,48 +1,256 @@
 <%- include("../layout/header") %>
 
+<!-- ================= PAGE HEADER ================= -->
 <section class="page-header">
   <div class="container">
-    <h1>Our Diagnostic Tests</h1>
-    <p>Accurate reports with fast turnaround time</p>
+    <h1 data-i18n="testsPageTitle">Our Diagnostic Tests</h1>
+    <p data-i18n="testsPageSubtitle">
+      Accurate reports • Fast turnaround • Home sample collection
+    </p>
   </div>
 </section>
 
+<!-- ================= TESTS LIST ================= -->
 <section class="tests">
-  <div class="container grid">
+  <div class="container tests-grid">
 
-    <div class="card">
-      <h3>Complete Blood Count (CBC)</h3>
-      <p>Haematology</p>
-      <a href="https://wa.me/919821220304" target="_blank" class="btn-outline">
-        Book on WhatsApp
-      </a>
+    <!-- CBC -->
+    <div class="test-card">
+      <div class="test-content">
+        <div class="test-icon">🩸</div>
+        <h3>Complete Blood Count (CBC)</h3>
+        <span class="test-category">Haematology</span>
+      </div>
+
+      <div class="test-actions">
+        <button class="btn-view-details" onclick="openTestModal('CBC')">
+          🔍 <span data-i18n="viewDetails">View Details</span>
+        </button>
+        <a href="/book-test?test=CBC" class="btn-book-test">
+          🧾 <span data-i18n="bookTest">Book Test</span>
+        </a>
+      </div>
     </div>
 
-    <div class="card">
-      <h3>Liver Function Test (LFT)</h3>
-      <p>Biochemistry</p>
-      <a href="https://wa.me/919821220304" target="_blank" class="btn-outline">
-        Book on WhatsApp
-      </a>
+    <!-- LFT -->
+    <div class="test-card">
+      <div class="test-content">
+        <div class="test-icon">🧪</div>
+        <h3>Liver Function Test (LFT)</h3>
+        <span class="test-category">Biochemistry</span>
+      </div>
+
+      <div class="test-actions">
+        <button class="btn-view-details" onclick="openTestModal('LFT')">
+          🔍 <span data-i18n="viewDetails">View Details</span>
+        </button>
+        <a href="/book-test?test=LFT" class="btn-book-test">
+          🧾 <span data-i18n="bookTest">Book Test</span>
+        </a>
+      </div>
     </div>
 
-    <div class="card">
-      <h3>Thyroid Profile</h3>
-      <p>Endocrinology</p>
-      <a href="https://wa.me/919821220304" target="_blank" class="btn-outline">
-        Book on WhatsApp
-      </a>
+    <!-- Thyroid -->
+    <div class="test-card">
+      <div class="test-content">
+        <div class="test-icon">🧬</div>
+        <h3>Thyroid Profile</h3>
+        <span class="test-category">Endocrinology</span>
+      </div>
+
+      <div class="test-actions">
+        <button class="btn-view-details" onclick="openTestModal('THYROID')">
+          🔍 <span data-i18n="viewDetails">View Details</span>
+        </button>
+        <a href="/book-test?test=Thyroid" class="btn-book-test">
+          🧾 <span data-i18n="bookTest">Book Test</span>
+        </a>
+      </div>
     </div>
 
-    <div class="card">
-      <h3>Fever Panel</h3>
-      <p>Dengue, Malaria, Typhoid</p>
-      <a href="https://wa.me/919821220304" target="_blank" class="btn-outline">
-        Book on WhatsApp
-      </a>
+    <!-- Fever -->
+    <div class="test-card">
+      <div class="test-content">
+        <div class="test-icon">🌡️</div>
+        <h3>Fever Panel</h3>
+        <span class="test-category">Dengue • Malaria • Typhoid</span>
+      </div>
+
+      <div class="test-actions">
+        <button class="btn-view-details" onclick="openTestModal('FEVER')">
+          🔍 <span data-i18n="viewDetails">View Details</span>
+        </button>
+        <a href="/book-test?test=Fever%20Panel" class="btn-book-test">
+          🧾 <span data-i18n="bookTest">Book Test</span>
+        </a>
+      </div>
     </div>
 
   </div>
 </section>
 
+
+<!-- ================= TEST DETAILS MODAL ================= -->
+<div id="testModal" class="modal-overlay">
+  <div class="modal-container">
+
+    <button class="modal-close" onclick="closeModal()">×</button>
+
+    <h2 id="modalTitle"></h2>
+
+    <div class="modal-section">
+        <h4 data-i18n="modalWhat">What is this test?</h4>
+      <p id="modalMeaning"></p>
+    </div>
+
+    <div class="modal-section">
+        <h4 data-i18n="modalWhyTitle">Why is this test done?</h4>
+      <ul id="modalWhy"></ul>
+    </div>
+
+    <div class="modal-section">
+        <h4 data-i18n="modalPrepTitle">Preparation Required</h4>
+      <p id="modalPrep"></p>
+    </div>
+
+    <div class="modal-info">
+      ⏱ Report Time: <b id="modalReport"></b> &nbsp; | &nbsp;
+      🏠 Home Sample Collection Available
+    </div>
+
+    <div class="modal-footer">
+      <a id="modalBookLink" class="btn-book-test">Book This Test</a>
+    </div>
+
+  </div>
+</div>
+
+<!-- ================= SCRIPT ================= -->
+<script>
+    function openTestModal(testKey) {
+      const lang = localStorage.getItem("siteLang") || "en";
+    
+      const tests = {
+        CBC: {
+          title: "Complete Blood Count (CBC)",
+          en: {
+            meaning: "CBC is a blood test that evaluates your overall health by measuring red blood cells, white blood cells, hemoglobin and platelets.",
+            why: [
+              "Detect infections or fever",
+              "Identify anemia or weakness",
+              "Monitor general health"
+            ],
+            prep: "No fasting required. Normal food and water allowed."
+          },
+          hi: {
+            meaning: "CBC एक रक्त जांच है जो लाल रक्त कोशिकाओं, श्वेत कोशिकाओं, हीमोग्लोबिन और प्लेटलेट्स की जांच करके आपके स्वास्थ्य का मूल्यांकन करती है।",
+            why: [
+              "संक्रमण या बुखार की पहचान",
+              "एनीमिया या कमजोरी की जांच",
+              "सामान्य स्वास्थ्य की निगरानी"
+            ],
+            prep: "उपवास की आवश्यकता नहीं है। सामान्य भोजन और पानी ले सकते हैं।"
+          },
+          report: "Same Day",
+          link: "/book-test?test=CBC"
+        },
+    
+        LFT: {
+          title: "Liver Function Test (LFT)",
+          en: {
+            meaning: "LFT checks how well your liver is working by measuring enzymes, proteins and bilirubin.",
+            why: [
+              "Detect liver disease",
+              "Monitor hepatitis or alcohol effects",
+              "Investigate jaundice or abdominal pain"
+            ],
+            prep: "Fasting for 8–10 hours recommended."
+          },
+          hi: {
+            meaning: "LFT जांच यह बताती है कि आपका लिवर कितनी अच्छी तरह काम कर रहा है।",
+            why: [
+              "लिवर रोग की पहचान",
+              "हेपेटाइटिस या शराब के प्रभाव की जांच",
+              "पीलिया या पेट दर्द की जांच"
+            ],
+            prep: "8–10 घंटे का उपवास आवश्यक है।"
+          },
+          report: "Same Day",
+          link: "/book-test?test=LFT"
+        },
+    
+        THYROID: {
+          title: "Thyroid Profile",
+          en: {
+            meaning: "This test measures thyroid hormones (T3, T4, TSH) that control metabolism, weight and energy.",
+            why: [
+              "Unexplained weight changes",
+              "Fatigue, hair fall, irregular periods",
+              "Suspected thyroid imbalance"
+            ],
+            prep: "No fasting required unless advised by doctor."
+          },
+          hi: {
+            meaning: "यह जांच थायरॉइड हार्मोन (T3, T4, TSH) को मापती है जो शरीर के मेटाबॉलिज्म को नियंत्रित करते हैं।",
+            why: [
+              "अचानक वजन बढ़ना या घटना",
+              "थकान, बाल झड़ना, अनियमित पीरियड्स",
+              "थायरॉइड असंतुलन की जांच"
+            ],
+            prep: "डॉक्टर की सलाह के बिना उपवास आवश्यक नहीं है।"
+          },
+          report: "Same Day",
+          link: "/book-test?test=Thyroid"
+        },
+    
+        FEVER: {
+          title: "Fever Panel",
+          en: {
+            meaning: "Fever panel helps detect common causes of fever such as Dengue, Malaria and Typhoid.",
+            why: [
+              "High fever for more than 2 days",
+              "Body pain, chills or weakness",
+              "Doctor advised fever investigation"
+            ],
+            prep: "No special preparation required."
+          },
+          hi: {
+            meaning: "फीवर पैनल बुखार के सामान्य कारणों जैसे डेंगू, मलेरिया और टाइफाइड की पहचान करता है।",
+            why: [
+              "2 दिन से अधिक बुखार",
+              "शरीर दर्द, ठंड लगना या कमजोरी",
+              "डॉक्टर द्वारा जांच की सलाह"
+            ],
+            prep: "कोई विशेष तैयारी आवश्यक नहीं है।"
+          },
+          report: "Same Day",
+          link: "/book-test?test=Fever%20Panel"
+        }
+      };
+    
+      const t = tests[testKey];
+      const content = t[lang];
+    
+      document.getElementById("modalTitle").innerText = t.title;
+      document.getElementById("modalMeaning").innerText = content.meaning;
+      document.getElementById("modalPrep").innerText = content.prep;
+      document.getElementById("modalReport").innerText = t.report;
+      document.getElementById("modalBookLink").href = t.link;
+    
+      const ul = document.getElementById("modalWhy");
+      ul.innerHTML = "";
+      content.why.forEach(item => {
+        const li = document.createElement("li");
+        li.textContent = item;
+        ul.appendChild(li);
+      });
+    
+      document.getElementById("testModal").style.display = "flex";
+    }
+    
+    function closeModal() {
+      document.getElementById("testModal").style.display = "none";
+    }
+    </script>
+    
 <%- include("../layout/footer") %>

@@ -1,0 +1,65 @@
+<%- include("../layout/header") %>
+
+<section class="contact-page">
+  <div class="container">
+
+    <!-- PAGE HEADER -->
+    <div class="contact-header">
+      <h2 data-i18n="contactTitle">Contact Us</h2>
+      <p data-i18n="contactSubtitle">
+        We’re here to help you with bookings & enquiries
+      </p>
+    </div>
+
+    <!-- CONTENT WRAPPER -->
+    <div class="contact-wrapper">
+
+      <!-- LEFT : CONTACT INFO -->
+      <div class="contact-info">
+        <h3 data-i18n="contactHeading">Get in Touch</h3>
+
+        <p data-i18n="contactIntro">
+          Have questions about diagnostic tests, reports, or home
+          sample collection? Reach out to us anytime.
+        </p>
+
+        <div class="contact-item">
+          <span>📍</span>
+          <p>
+            Motichand College Campus,<br />
+            Kurmauta, Kasia,<br />
+            Kushinagar, Uttar Pradesh
+          </p>
+        </div>
+
+        <div class="contact-item">
+          <span>📞</span>
+          <p><strong>9821220304</strong></p>
+        </div>
+
+        <div class="contact-item">
+          <span>⏰</span>
+          <p data-i18n="contactTiming">
+            Open All Days | Fast Report Delivery
+          </p>
+        </div>
+
+        <a href="/book-test" class="contact-btn">
+          <span data-i18n="contactCTA">Book a Test</span>
+        </a>
+      </div>
+
+      <!-- RIGHT : MAP -->
+      <div class="contact-map">
+        <iframe
+          src="https://www.google.com/maps?q=Motichand%20College%20Campus%20Kasia%20Kushinagar&output=embed"
+          allowfullscreen
+          loading="lazy"
+        ></iframe>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<%- include("../layout/footer") %>

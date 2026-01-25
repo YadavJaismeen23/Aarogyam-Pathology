@@ -1,23 +1,216 @@
 <%- include("../layout/header") %>
 
 <section class="hero">
-  <div class="container">
-    <h1>Trusted Diagnostic & Pathology Services</h1>
-    <p>Accurate reports • Fast turnaround • Doorstep sample collection</p>
+  <div class="hero-bg"></div> 
+  <div class="container hero-grid hero-content">
 
-    <a href="https://wa.me/919821220304" target="_blank" class="btn-primary">
-      Book Test on WhatsApp
-    </a>
+    <div class="hero-text">
+      <h1 data-i18n="homeHeroTitle">
+        Trusted Diagnostic & Pathology Services
+      </h1>
+
+      <div class="hero-highlights">
+        <div class="highlight">
+          <span class="icon" style="color:black;">✔</span>
+          <span class="text" style="color:black;" data-i18n="homeHighlight1">
+            Accurate reports with fast turnaround
+          </span>
+        </div>
+
+        <div class="highlight">
+          <span class="icon">🏠</span>
+          <span class="text" style="color:black;" data-i18n="homeHighlight2">
+            Safe and convenient home sample collection
+          </span>
+        </div>
+      </div>
+
+      <div class="hero-actions">
+        <a href="/tests" class="btn-outline">
+          🔍 <span data-i18n="viewTests">View Tests</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- FEATURES (KEEP TEST NAMES IN ENGLISH) -->
+    <div class="hero-features">
+
+      <div class="feature-box">
+        <div class="feature-inner">
+          <div class="feature-front">
+            <div class="feature-icon">🧪</div>
+            <p style="color:black;">CBC, LFT, KFT, Thyroid</p>
+          </div>
+          <div class="feature-back" style="color:black;">
+            <ul>
+              <li data-i18n="cbc1">Complete blood count</li>
+              <li data-i18n="cbc2">Liver & kidney tests</li>
+              <li data-i18n="cbc3">Hormone screening</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="feature-box">
+        <div class="feature-inner">
+          <div class="feature-front">
+            <div class="feature-icon">⚡</div>
+            <p data-i18n="fastReports" style="color:black;">Reports in 1–6 Hours</p>
+          </div>
+          <div class="feature-back" style="color:black;">
+            <ul>
+              <li data-i18n="fast1">Fast processing</li>
+              <li data-i18n="fast2">Priority reporting</li>
+              <li data-i18n="fast3">Same-day results</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="feature-box">
+        <div class="feature-inner">
+          <div class="feature-front">
+            <div class="feature-icon">🏠</div>
+            <p data-i18n="homeCollection" style="color:black;">Home Sample Collection</p>
+          </div>
+          <div class="feature-back" style="color:black;">
+            <ul>
+              <li data-i18n="home1">Safe doorstep pickup</li>
+              <li data-i18n="home2">Trained professionals</li>
+              <li data-i18n="home3">Flexible time slots</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="feature-box">
+        <div class="feature-inner">
+          <div class="feature-front">
+            <div class="feature-icon">📄</div>
+            <p style="color:black;">WhatsApp Reports</p>
+          </div>
+          <div class="feature-back" style="color:black;">
+            <ul>
+              <li data-i18n="wa1">Instant delivery</li>
+              <li data-i18n="wa2">Doctor-friendly format</li>
+              <li data-i18n="wa3">Easy access anytime</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
   </div>
 </section>
 
 <section class="features">
-  <div class="container grid">
-    <div class="card">✔ CBC, LFT, KFT, Thyroid</div>
-    <div class="card">✔ Fever & Infection Panels</div>
-    <div class="card">✔ Reports in 1–6 hrs</div>
-    <div class="card">✔ Home Sample Collection</div>
+  <div class="container">
+    <div class="features-grid">
+
+      <div class="feature-tile">
+        <div class="feature-tile-icon">🩸</div>
+        <h3 data-i18n="feat1Title">Fever & Infection Panels</h3>
+        <p data-i18n="feat1Desc">
+          Comprehensive tests to detect infections early and accurately.
+        </p>
+      </div>
+
+      <div class="feature-tile">
+        <div class="feature-tile-icon">🧬</div>
+        <h3 data-i18n="feat2Title">Diabetes & Thyroid Tests</h3>
+        <p data-i18n="feat2Desc">
+          Routine and advanced tests for metabolic and hormonal health.
+        </p>
+      </div>
+
+      <div class="feature-tile">
+        <div class="feature-tile-icon">🧫</div>
+        <h3 data-i18n="feat3Title">Pregnancy & Hormonal Tests</h3>
+        <p data-i18n="feat3Desc">
+          Reliable testing for pregnancy monitoring and hormone balance.
+        </p>
+      </div>
+
+      <div class="feature-tile">
+        <div class="feature-tile-icon">🛡️</div>
+        <h3 data-i18n="feat4Title">Preventive Health Packages</h3>
+        <p data-i18n="feat4Desc">
+          Wellness packages designed for early detection and prevention.
+        </p>
+      </div>
+
+    </div>
   </div>
 </section>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+  
+    /* ===============================
+       HERO IMAGE SLIDER
+    =============================== */
+  
+    const desktopImages = [
+      "/images/hero/desktop/hero1.jpeg",
+      "/images/hero/desktop/hero2.jpeg",
+      "/images/hero/desktop/hero3.jpeg",
+      "/images/hero/desktop/hero4.jpeg"
+    ];
+  
+    const mobileImages = [
+      "/images/hero/mobile/hero-m1.jpeg",
+      "/images/hero/mobile/hero-m2.jpeg",
+      "/images/hero/mobile/hero-m3.jpeg",
+      "/images/hero/mobile/hero-m4.jpeg"
+    ];
+  
+    let index = 0;
+    let images = [];
+    const heroBg = document.querySelector(".hero-bg");
+  
+    function isMobile() {
+      return window.innerWidth <= 768;
+    }
+  
+    function setImages() {
+      images = isMobile() ? mobileImages : desktopImages;
+      index = 0;
+      heroBg.style.backgroundImage = `url(${images[index]})`;
+    }
+  
+    function changeHeroImage() {
+      if (!images.length) return;
+      index = (index + 1) % images.length;
+      heroBg.style.backgroundImage = `url(${images[index]})`;
+    }
+  
+    // Init slider
+    setImages();
+    setInterval(changeHeroImage, 5000);
+  
+    window.addEventListener("resize", setImages);
+  
+  
+    /* ===============================
+       HERO FEATURE FLIP (MOBILE + DESKTOP)
+    =============================== */
+  
+    document.querySelectorAll(".feature-box").forEach(box => {
+      box.addEventListener("click", e => {
+        e.preventDefault();
+  
+        const inner = box.querySelector(".feature-inner");
+  
+        // Close other cards
+        document.querySelectorAll(".feature-inner").forEach(el => {
+          if (el !== inner) el.classList.remove("flipped");
+        });
+  
+        inner.classList.toggle("flipped");
+      });
+    });
+  
+  });
+  </script>
+  
 
 <%- include("../layout/footer") %>
