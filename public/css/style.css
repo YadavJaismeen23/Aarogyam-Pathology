@@ -979,27 +979,37 @@
       padding: 22px;
     }
   }
-  
 /* =====================================================
-   ABOUT SECTION (CLEAN + MOBILE SAFE)
+   ABOUT SECTION — CLEAN, SAFE & MOBILE-PROOF
 ===================================================== */
 
-/* Safety: prevent horizontal scroll */
+/* -----------------------------------------------------
+   GLOBAL SAFETY (no horizontal cut on mobile)
+----------------------------------------------------- */
 .about-section,
 .about-wrapper,
 .about-text,
-.about-services {
+.about-services,
+.service-card {
   max-width: 100%;
+  box-sizing: border-box;
+}
+
+.about-section {
   overflow-x: hidden;
 }
 
-/* SECTION */
+/* -----------------------------------------------------
+   SECTION
+----------------------------------------------------- */
 .about-section {
   padding: 90px 20px;
-  background: linear-gradient(180deg, #f4f9f7, #ffffff);
+  background: linear-gradient(180deg, #f4f9f7 0%, #ffffff 100%);
 }
 
-/* HEADER */
+/* -----------------------------------------------------
+   HEADER
+----------------------------------------------------- */
 .about-header {
   text-align: center;
   margin-bottom: 50px;
@@ -1009,6 +1019,7 @@
   font-size: 38px;
   font-weight: 700;
   color: #1b4d3e;
+  margin-bottom: 6px;
 }
 
 .about-header p {
@@ -1016,7 +1027,9 @@
   color: #5f7d73;
 }
 
-/* WRAPPER */
+/* -----------------------------------------------------
+   WRAPPER CARD
+----------------------------------------------------- */
 .about-wrapper {
   background: #ffffff;
   border-radius: 18px;
@@ -1025,9 +1038,12 @@
   grid-template-columns: 1.3fr 1fr;
   gap: 40px;
   box-shadow: 0 25px 60px rgba(0, 0, 0, 0.08);
+  overflow: visible; /* 🔑 prevents card cut */
 }
 
-/* LEFT CONTENT */
+/* -----------------------------------------------------
+   LEFT CONTENT
+----------------------------------------------------- */
 .about-tag {
   display: inline-block;
   background: #e6f4ef;
@@ -1036,7 +1052,7 @@
   font-weight: 600;
   padding: 6px 14px;
   border-radius: 50px;
-  margin-bottom: 15px;
+  margin-bottom: 14px;
 }
 
 .about-text h3 {
@@ -1045,13 +1061,12 @@
   color: #1f2d2b;
 }
 
-/* TEXT WRAPPING FIX (CRITICAL) */
+/* Text wrapping safety */
 .about-text,
 .about-text p,
-.about-text span,
-.about-text strong {
-  max-width: 100%;
-  word-break: normal;
+.about-text strong,
+.about-text span {
+  word-wrap: break-word;
   overflow-wrap: break-word;
   white-space: normal;
 }
@@ -1063,7 +1078,9 @@
   margin-bottom: 14px;
 }
 
-/* FEATURE PILLS */
+/* -----------------------------------------------------
+   FEATURE PILLS
+----------------------------------------------------- */
 .feature-pills {
   margin-top: 25px;
   display: flex;
@@ -1078,11 +1095,12 @@
   border-radius: 30px;
   font-size: 14px;
   font-weight: 500;
-  max-width: 100%;
   text-align: center;
 }
 
-/* RIGHT SIDE – SERVICES */
+/* -----------------------------------------------------
+   RIGHT SIDE — SERVICES
+----------------------------------------------------- */
 .about-services {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -1114,7 +1132,7 @@
   line-height: 1.6;
 }
 
-/* Hover (desktop only) */
+/* Desktop hover only */
 @media (hover: hover) {
   .service-card:hover {
     transform: translateY(-6px);
@@ -1122,7 +1140,7 @@
   }
 }
 
-/* Highlight Card */
+/* Highlight card */
 .service-card.highlight {
   background: #1b4d3e;
   color: #ffffff;
@@ -1137,10 +1155,11 @@
    RESPONSIVE
 ===================================================== */
 
+/* Tablet */
 @media (max-width: 992px) {
   .about-wrapper {
     grid-template-columns: 1fr;
-    padding: 30px;
+    padding: 32px;
   }
 
   .about-services {
@@ -1148,6 +1167,7 @@
   }
 }
 
+/* Mobile */
 @media (max-width: 576px) {
   .about-section {
     padding: 60px 15px;
@@ -1183,6 +1203,7 @@
     grid-template-columns: 1fr;
   }
 }
+
 
   /* CONTACT PAGE */
 .contact-page {
