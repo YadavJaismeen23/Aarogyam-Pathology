@@ -980,182 +980,210 @@
     }
   }
   
- /* ABOUT SECTION */
+/* =====================================================
+   ABOUT SECTION (CLEAN + MOBILE SAFE)
+===================================================== */
 
- /* Prevent horizontal overflow globally */
-html, body {
-    max-width: 100%;
-    overflow-x: hidden;
-  }
-  
+/* Safety: prevent horizontal scroll */
+.about-section,
+.about-wrapper,
+.about-text,
+.about-services {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* SECTION */
 .about-section {
-    padding: 90px 20px;
-    background: linear-gradient(180deg, #f4f9f7, #ffffff);
-  }
-  
-  /* HEADER */
-  .about-header {
-    text-align: center;
-    margin-bottom: 50px;
-  }
-  
-  .about-header h2 {
-    font-size: 38px;
-    font-weight: 700;
-    color: #1b4d3e;
-  }
-  
-  .about-header p {
-    color: #5f7d73;
-    font-size: 16px;
-  }
-  
-  /* WRAPPER */
-  .about-wrapper {
-    background: #ffffff;
-    border-radius: 18px;
-    padding: 50px;
-    display: grid;
-    grid-template-columns: 1.3fr 1fr;
-    gap: 40px;
-    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.08);
-  }
-  
-  /* LEFT */
-  .about-tag {
-    display: inline-block;
-    background: #e6f4ef;
-    color: #1b4d3e;
-    font-size: 13px;
-    font-weight: 600;
-    padding: 6px 14px;
-    border-radius: 50px;
-    margin-bottom: 15px;
-  }
-  
-  .about-text h3 {
-    font-size: 30px;
-    margin-bottom: 15px;
-    color: #1f2d2b;
-  }
-  
-  .about-text p {
-    font-size: 15.5px;
-    line-height: 1.8;
-    color: #4d5f5a;
-    margin-bottom: 14px;
-  }
-  
-  /* FEATURE PILLS */
-  .feature-pills {
-    margin-top: 25px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-  
-  .feature-pills span {
-    background: #f0f7f5;
-    color: #1b4d3e;
-    padding: 8px 14px;
-    border-radius: 30px;
-    font-size: 14px;
-    font-weight: 500;
-  }
-  
-  /* RIGHT */
-  .about-services {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-  }
-  
-  .service-card {
-    background: #f9fbfa;
-    padding: 25px;
-    border-radius: 16px;
-    text-align: center;
-    transition: all 0.3s ease;
-  }
-  
-  .service-card .icon {
-    font-size: 34px;
-    margin-bottom: 10px;
-  }
-  
-  .service-card h4 {
-    font-size: 17px;
-    margin-bottom: 6px;
-    color: #1b4d3e;
-  }
-  
-  .service-card p {
-    font-size: 14px;
-    color: #5a6f69;
-  }
-  
+  padding: 90px 20px;
+  background: linear-gradient(180deg, #f4f9f7, #ffffff);
+}
+
+/* HEADER */
+.about-header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.about-header h2 {
+  font-size: 38px;
+  font-weight: 700;
+  color: #1b4d3e;
+}
+
+.about-header p {
+  font-size: 16px;
+  color: #5f7d73;
+}
+
+/* WRAPPER */
+.about-wrapper {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 50px;
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 40px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.08);
+}
+
+/* LEFT CONTENT */
+.about-tag {
+  display: inline-block;
+  background: #e6f4ef;
+  color: #1b4d3e;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 50px;
+  margin-bottom: 15px;
+}
+
+.about-text h3 {
+  font-size: 30px;
+  margin-bottom: 15px;
+  color: #1f2d2b;
+}
+
+/* TEXT WRAPPING FIX (CRITICAL) */
+.about-text,
+.about-text p,
+.about-text span,
+.about-text strong {
+  max-width: 100%;
+  word-break: normal;
+  overflow-wrap: break-word;
+  white-space: normal;
+}
+
+.about-text p {
+  font-size: 15.5px;
+  line-height: 1.8;
+  color: #4d5f5a;
+  margin-bottom: 14px;
+}
+
+/* FEATURE PILLS */
+.feature-pills {
+  margin-top: 25px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.feature-pills span {
+  background: #f0f7f5;
+  color: #1b4d3e;
+  padding: 8px 14px;
+  border-radius: 30px;
+  font-size: 14px;
+  font-weight: 500;
+  max-width: 100%;
+  text-align: center;
+}
+
+/* RIGHT SIDE – SERVICES */
+.about-services {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.service-card {
+  background: #f9fbfa;
+  padding: 25px;
+  border-radius: 16px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-card .icon {
+  font-size: 34px;
+  margin-bottom: 10px;
+}
+
+.service-card h4 {
+  font-size: 17px;
+  margin-bottom: 6px;
+  color: #1b4d3e;
+}
+
+.service-card p {
+  font-size: 14px;
+  color: #5a6f69;
+  line-height: 1.6;
+}
+
+/* Hover (desktop only) */
+@media (hover: hover) {
   .service-card:hover {
     transform: translateY(-6px);
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
   }
-  
-  .service-card.highlight {
-    background: #1b4d3e;
-    color: #fff;
-  }
-  
-  .service-card.highlight h4,
-  .service-card.highlight p {
-    color: #fff;
-  }
-  
-/* =========================
-   RESPONSIVE FIXES
-========================= */
+}
+
+/* Highlight Card */
+.service-card.highlight {
+  background: #1b4d3e;
+  color: #ffffff;
+}
+
+.service-card.highlight h4,
+.service-card.highlight p {
+  color: #ffffff;
+}
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
 
 @media (max-width: 992px) {
-    .about-wrapper {
-      grid-template-columns: 1fr;
-      padding: 30px;
-    }
-  
-    .about-services {
-      grid-template-columns: 1fr 1fr;
-    }
+  .about-wrapper {
+    grid-template-columns: 1fr;
+    padding: 30px;
   }
-  
-  @media (max-width: 576px) {
-    .about-section {
-      padding: 60px 15px;
-    }
-  
-    .about-header h2 {
-      font-size: 28px;
-    }
-  
-    .about-text h3 {
-      font-size: 24px;
-    }
-  
-    .about-wrapper {
-      padding: 22px;
-    }
-  
-    .feature-pills {
-      gap: 8px;
-    }
-  
-    .feature-pills span {
-      font-size: 13px;
-      padding: 7px 12px;
-      white-space: normal;      /* 👈 important */
-      text-align: center;
-    }
-  
-    .about-services {
-      grid-template-columns: 1fr;
-    }
+
+  .about-services {
+    grid-template-columns: 1fr 1fr;
   }
+}
+
+@media (max-width: 576px) {
+  .about-section {
+    padding: 60px 15px;
+  }
+
+  .about-header h2 {
+    font-size: 28px;
+  }
+
+  .about-text h3 {
+    font-size: 24px;
+  }
+
+  .about-wrapper {
+    padding: 18px;
+  }
+
+  .about-text p {
+    font-size: 14.5px;
+    line-height: 1.7;
+  }
+
+  .feature-pills {
+    gap: 8px;
+  }
+
+  .feature-pills span {
+    font-size: 13px;
+    padding: 7px 12px;
+  }
+
+  .about-services {
+    grid-template-columns: 1fr;
+  }
+}
+
   /* CONTACT PAGE */
 .contact-page {
     padding: 90px 20px;
