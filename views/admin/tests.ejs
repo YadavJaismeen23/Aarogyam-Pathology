@@ -1,0 +1,73 @@
+<%- include('layout-top', { title: 'Manage Tests', page: 'tests' }) %>
+
+<% if (typeof flash !== 'undefined' && flash) { %>
+<div class="flash-message flash-<%= flash.type %>"><%= flash.msg %></div>
+<% } %>
+
+<div class="card" style="margin-bottom:24px">
+  <div class="card-header"><h3>Add New Test</h3></div>
+  <div class="card-body" style="padding:24px">
+    <form method="POST" action="/admin/tests/add">
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;flex-wrap:wrap">
+        <div class="form-group">
+          <label>Test Name (English)</label>
+          <input type="text" name="name" class="form-control" required />
+        </div>
+        <div class="form-group">
+          <label>Test Name (Hindi)</label>
+          <input type="text" name="nameHi" class="form-control" required />
+        </div>
+        <div class="form-group">
+          <label>Category</label>
+          <input type="text" name="category" class="form-control" required placeholder="e.g. Haematology" />
+        </div>
+        <div class="form-group">
+          <label>Description</label>
+          <input type="text" name="description" class="form-control" />
+        </div>
+        <div class="form-group">
+          <label>Price (₹)</label>
+          <input type="number" name="price" class="form-control" required />
+        </div>
+        <div class="form-group">
+          <label>Report Time</label>
+          <input type="text" name="reportTime" class="form-control" placeholder="e.g. 2 hours" />
+        </div>
+      </div>
+      <div style="display:flex;gap:16px;align-items:center">
+        <label style="display:flex;align-items:center;gap:8px;font-size:0.88rem;cursor:pointer">
+          <input type="checkbox" name="popular" /> Mark as Popular
+        </label>
+        <button type="submit" class="btn btn-primary btn-sm">Add Test</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header"><h3>All Tests (<%= tests.length %>)</h3></div>
+  <div class="card-body">
+    <table class="data-table">
+      <thead><tr><th>Name</th><th>Hindi</th><th>Category</th><th>Price</th><th>Report Time</th><th>Popular</th><th>Action</th></tr></thead>
+      <tbody>
+        <% tests.forEach(t => { %>
+        <tr>
+          <td><strong><%= t.name %></strong></td>
+          <td class="hindi" style="font-size:0.85rem"><%= t.nameHi %></td>
+          <td><span class="badge badge-confirmed"><%= t.category %></span></td>
+          <td style="font-family:var(--font-display);font-weight:700">₹<%= t.price %></td>
+          <td style="font-size:0.82rem"><%= t.reportTime %></td>
+          <td><%= t.popular ? '⭐' : '—' %></td>
+          <td>
+            <form method="POST" action="/admin/tests/<%= t.id %>/delete" onsubmit="return confirm('Delete this test?')">
+              <button type="submit" class="btn btn-sm" style="background:rgba(196,30,58,0.1);color:var(--crimson)">Delete</button>
+            </form>
+          </td>
+        </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<%- include('layout-bottom') %>

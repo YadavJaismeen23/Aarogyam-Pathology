@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= typeof title !== 'undefined' ? title + ' | Aarogyam Lifecare' : 'Aarogyam Lifecare — Diagnostic & Pathology Centre, Kushinagar' %></title>
+  <meta name="description" content="Aarogyam Lifecare Diagnostic and Pathology Centre — Motichand College Campus, Kushinagar. Accurate results, modern equipment. Book appointment: 9821220304" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Hindi:ital@0;1&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/main.css" />
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-inner">
+    <a href="/" class="nav-brand">
+      <div class="nav-logo">
+        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
+      </div>
+      <div class="nav-brand-text">
+        <span>Aarogyam Lifecare</span>
+        <span>Diagnostic &amp; Pathology Centre</span>
+      </div>
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a href="/" class="<%= typeof page !== 'undefined' && page === 'home' ? 'active' : '' %>">Home</a>
+      <a href="/tests" class="<%= typeof page !== 'undefined' && page === 'tests' ? 'active' : '' %>">Tests &amp; Prices</a>
+      <a href="/reports" class="<%= typeof page !== 'undefined' && page === 'reports' ? 'active' : '' %>">Reports</a>
+      <a href="/about" class="<%= typeof page !== 'undefined' && page === 'about' ? 'active' : '' %>">About</a>
+      <a href="/contact" class="<%= typeof page !== 'undefined' && page === 'contact' ? 'active' : '' %>">Contact</a>
+      <a href="/appointment" class="btn-nav">Book Appointment</a>
+    </div>
+    <div class="hamburger" id="hamburger">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,99 @@
+<%- include('partials/header', { page: 'tests', title: 'Tests & Prices' }) %>
+
+<div class="page-hero">
+  <h1>Tests &amp; Prices</h1>
+  <p class="hindi">सभी जांच और उनके दाम</p>
+</div>
+
+<section class="section section-bg">
+  <div class="section-inner">
+    <!-- Search -->
+    <div style="max-width:480px;margin:0 auto 32px">
+      <input type="text" id="testSearch" class="form-control" placeholder="Search test... (e.g. Dengue, Thyroid, CBC)" style="font-size:1rem;padding:14px 20px;background:white" />
+    </div>
+
+    <!-- Filters -->
+    <div class="tests-filter">
+      <button class="filter-btn active" data-cat="all">All Tests</button>
+      <% const cats = [...new Set(tests.map(t => t.category))]; %>
+      <% cats.forEach(cat => { %>
+        <button class="filter-btn" data-cat="<%= cat %>"><%= cat %></button>
+      <% }) %>
+    </div>
+
+    <!-- Grid -->
+    <div class="tests-grid" id="testsGrid">
+      <% tests.forEach(test => { %>
+      <div class="test-card <%= test.popular ? 'popular' : '' %>" data-category="<%= test.category %>" data-name="<%= test.name.toLowerCase() %> <%= test.nameHi %>">
+        <% if (test.popular) { %><span class="test-badge-popular">⭐ Popular</span><% } %>
+        <div class="test-category"><%= test.category %></div>
+        <div class="test-name"><%= test.name %></div>
+        <div class="test-name-hi hindi"><%= test.nameHi %></div>
+        <p class="test-desc"><%= test.description %> — <span class="hindi" style="font-size:0.78rem"><%= test.descriptionHi %></span></p>
+        <div class="test-footer">
+          <div class="test-price">₹<%= test.price %> <span>onwards</span></div>
+          <div class="test-time">
+            <svg viewBox="0 0 24 24" width="13" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <%= test.reportTime %>
+          </div>
+        </div>
+      </div>
+      <% }) %>
+    </div>
+
+    <!-- Empty state -->
+    <div id="noResults" style="display:none;text-align:center;padding:64px 0;color:var(--slate)">
+      <p style="font-size:2rem">🔬</p>
+      <p style="margin-top:12px">No tests found. Try a different search.</p>
+    </div>
+
+    <!-- Info box -->
+    <div style="margin-top:40px;background:white;border:1px solid var(--border);border-radius:var(--radius-lg);padding:28px;display:flex;gap:20px;align-items:flex-start;flex-wrap:wrap">
+      <div style="flex:1;min-width:200px">
+        <h3 style="font-family:var(--font-display);font-weight:700;margin-bottom:6px">📞 Book a Test</h3>
+        <p style="font-size:0.88rem;color:var(--slate)">Call or WhatsApp: <strong>9821220304</strong><br>Walk-in also available at the centre.</p>
+      </div>
+      <div style="flex:1;min-width:200px">
+        <h3 style="font-family:var(--font-display);font-weight:700;margin-bottom:6px">🚚 Home Collection</h3>
+        <p style="font-size:0.88rem;color:var(--slate)">Doorstep sample collection available.<br>Call to schedule: 9821220304</p>
+      </div>
+      <div style="flex:1;min-width:200px">
+        <h3 style="font-family:var(--font-display);font-weight:700;margin-bottom:6px">💊 Discount Panels</h3>
+        <p style="font-size:0.88rem;color:var(--slate)">Ask about our health packages & panel discounts for multiple tests.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-strip">
+  <h2>Can't find your test?</h2>
+  <p>Call us and we'll check if it's available — <strong style="color:white">9821220304</strong></p>
+  <div class="actions">
+    <a href="/appointment" class="btn btn-ghost">Book Appointment</a>
+    <a href="https://wa.me/919821220304" class="btn" style="background:#25D366;color:white" target="_blank">WhatsApp Us</a>
+  </div>
+</section>
+
+<script>
+const searchInput = document.getElementById('testSearch');
+const grid = document.getElementById('testsGrid');
+const cards = Array.from(grid.querySelectorAll('.test-card'));
+const noResults = document.getElementById('noResults');
+
+searchInput.addEventListener('input', () => {
+  const q = searchInput.value.toLowerCase().trim();
+  let visible = 0;
+  cards.forEach(card => {
+    const name = card.dataset.name || '';
+    const cat = card.dataset.category.toLowerCase();
+    const match = !q || name.includes(q) || cat.includes(q);
+    card.style.display = match ? 'flex' : 'none';
+    if (match) visible++;
+  });
+  noResults.style.display = visible === 0 ? 'block' : 'none';
+  // reset filter buttons
+  if (q) document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+});
+</script>
+
+<%- include('partials/footer') %>

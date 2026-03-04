@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Login — Aarogyam Lifecare</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/main.css" />
+</head>
+<body>
+<div class="admin-login">
+  <div class="login-box">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:24px">
+      <div class="nav-logo" style="width:40px;height:40px"><svg viewBox="0 0 24 24" style="fill:white;width:20px;height:20px"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg></div>
+      <div>
+        <div style="font-family:var(--font-display);font-weight:800;font-size:0.95rem;color:var(--crimson)">Aarogyam Lifecare</div>
+        <div style="font-size:0.7rem;color:var(--slate)">Admin Panel</div>
+      </div>
+    </div>
+    <h1>Sign In</h1>
+    <p>Enter your credentials to access the admin panel</p>
+    <% if (typeof error !== 'undefined' && error) { %>
+    <div class="alert alert-error"><%= error %></div>
+    <% } %>
+    <form method="POST" action="/admin/login">
+      <div class="form-group">
+        <label>Username</label>
+        <input type="text" name="username" class="form-control" required autofocus />
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" name="password" class="form-control" required />
+      </div>
+      <button type="submit" class="btn btn-primary btn-full">Sign In</button>
+    </form>
+    <p style="margin-top:20px;font-size:0.8rem;color:var(--slate);text-align:center">
+      <a href="/" style="color:var(--crimson)">← Back to Website</a>
+    </p>
+  </div>
+</div>
+</body>
+</html>

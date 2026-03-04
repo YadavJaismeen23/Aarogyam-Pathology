@@ -1,0 +1,56 @@
+<%- include('layout-top', { title: 'Appointments', page: 'appointments' }) %>
+
+<% if (typeof flash !== 'undefined' && flash) { %>
+<div class="flash-message flash-<%= flash.type %>"><%= flash.msg %></div>
+<% } %>
+
+<div style="display:flex;gap:12px;margin-bottom:20px;flex-wrap:wrap">
+  <a href="/admin/appointments?status=all" class="btn btn-sm <%= filter==='all'?'btn-primary':'btn-outline' %>">All (<%= counts.all %>)</a>
+  <a href="/admin/appointments?status=pending" class="btn btn-sm <%= filter==='pending'?'btn-primary':'btn-outline' %>">Pending (<%= counts.pending %>)</a>
+  <a href="/admin/appointments?status=confirmed" class="btn btn-sm <%= filter==='confirmed'?'btn-primary':'btn-outline' %>">Confirmed (<%= counts.confirmed %>)</a>
+  <a href="/admin/appointments?status=done" class="btn btn-sm <%= filter==='done'?'btn-primary':'btn-outline' %>">Done (<%= counts.done %>)</a>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    <h3>Appointments</h3>
+  </div>
+  <div class="card-body">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>ID</th><th>Patient</th><th>Phone</th><th>Date</th><th>Time</th><th>Type</th><th>Tests</th><th>Referred By</th><th>Status</th><th>Update</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if (appointments.length === 0) { %>
+        <tr><td colspan="10" style="text-align:center;color:var(--slate);padding:32px">No appointments found.</td></tr>
+        <% } %>
+        <% appointments.forEach(a => { %>
+        <tr>
+          <td style="font-size:0.72rem;color:var(--slate)">#<%= a.id.slice(0,8) %></td>
+          <td><strong><%= a.name %></strong><br><span style="font-size:0.72rem;color:var(--slate)"><%= a.ageSex %></span></td>
+          <td><a href="https://wa.me/91<%= a.phone %>" target="_blank" style="color:var(--teal)"><%= a.phone %></a></td>
+          <td><%= a.date %></td>
+          <td style="font-size:0.8rem"><%= a.time %></td>
+          <td><span class="badge <%= a.serviceType==='home'?'badge-new':'badge-confirmed' %>"><%= a.serviceType==='home'?'Home':'Walk-in' %></span></td>
+          <td style="font-size:0.78rem;max-width:160px"><%= a.tests || '—' %></td>
+          <td style="font-size:0.78rem"><%= a.referredBy || '—' %></td>
+          <td><span class="badge badge-<%= a.status %>"><%= a.status %></span></td>
+          <td>
+            <form method="POST" action="/admin/appointments/<%= a.id %>/status">
+              <select name="status" onchange="this.form.submit()" style="font-size:0.75rem;padding:4px 8px;border-radius:6px;border:1px solid var(--border)">
+                <option value="pending" <%= a.status==='pending'?'selected':'' %>>Pending</option>
+                <option value="confirmed" <%= a.status==='confirmed'?'selected':'' %>>Confirmed</option>
+                <option value="done" <%= a.status==='done'?'selected':'' %>>Done</option>
+              </select>
+            </form>
+          </td>
+        </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<%- include('layout-bottom') %>

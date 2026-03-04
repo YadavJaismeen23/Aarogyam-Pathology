@@ -1,0 +1,80 @@
+<%- include('layout-top', { title: 'Dashboard', page: 'dashboard' }) %>
+
+<% if (typeof flash !== 'undefined' && flash) { %>
+<div class="flash-message flash-<%= flash.type %>"><%= flash.msg %></div>
+<% } %>
+
+<div class="stats-row">
+  <div class="stat-card">
+    <div class="icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+    <div class="val"><%= stats.total %></div>
+    <div class="key">Total Appointments</div>
+  </div>
+  <div class="stat-card">
+    <div class="icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+    <div class="val"><%= stats.pending %></div>
+    <div class="key">Pending Today</div>
+  </div>
+  <div class="stat-card">
+    <div class="icon"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+    <div class="val"><%= stats.confirmed %></div>
+    <div class="key">Confirmed</div>
+  </div>
+  <div class="stat-card">
+    <div class="icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/></svg></div>
+    <div class="val"><%= stats.reports %></div>
+    <div class="key">Reports Uploaded</div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    <h3>Recent Appointments</h3>
+    <a href="/admin/appointments" class="btn btn-outline btn-sm">View All</a>
+  </div>
+  <div class="card-body">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Patient</th>
+          <th>Phone</th>
+          <th>Date</th>
+          <th>Time</th>
+          <th>Service</th>
+          <th>Tests</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if (recentAppointments.length === 0) { %>
+        <tr><td colspan="9" style="text-align:center;color:var(--slate);padding:32px">No appointments yet.</td></tr>
+        <% } %>
+        <% recentAppointments.forEach(a => { %>
+        <tr>
+          <td style="font-size:0.75rem;color:var(--slate)">#<%= a.id.slice(0,8) %></td>
+          <td><strong><%= a.name %></strong><br><span style="font-size:0.75rem;color:var(--slate)"><%= a.ageSex %></span></td>
+          <td><a href="tel:<%= a.phone %>"><%= a.phone %></a></td>
+          <td><%= a.date %></td>
+          <td style="font-size:0.82rem"><%= a.time %></td>
+          <td><span class="badge <%= a.serviceType === 'home' ? 'badge-new' : 'badge-confirmed' %>"><%= a.serviceType === 'home' ? 'Home' : 'Walk-in' %></span></td>
+          <td style="font-size:0.8rem;max-width:140px;overflow:hidden;text-overflow:ellipsis"><%= a.tests || '—' %></td>
+          <td><span class="badge badge-<%= a.status %>"><%= a.status %></span></td>
+          <td>
+            <form method="POST" action="/admin/appointments/<%= a.id %>/status" style="display:inline">
+              <select name="status" onchange="this.form.submit()" style="font-size:0.75rem;padding:4px 8px;border-radius:6px;border:1px solid var(--border)">
+                <option value="pending" <%= a.status==='pending'?'selected':'' %>>Pending</option>
+                <option value="confirmed" <%= a.status==='confirmed'?'selected':'' %>>Confirmed</option>
+                <option value="done" <%= a.status==='done'?'selected':'' %>>Done</option>
+              </select>
+            </form>
+          </td>
+        </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<%- include('layout-bottom') %>

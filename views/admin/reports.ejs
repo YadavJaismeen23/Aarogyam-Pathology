@@ -1,0 +1,64 @@
+<%- include('layout-top', { title: 'Upload Reports', page: 'reports' }) %>
+
+<% if (typeof flash !== 'undefined' && flash) { %>
+<div class="flash-message flash-<%= flash.type %>"><%= flash.msg %></div>
+<% } %>
+
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start">
+  <!-- Upload form -->
+  <div class="card">
+    <div class="card-header"><h3>Upload New Report</h3></div>
+    <div class="card-body" style="padding:24px">
+      <form method="POST" action="/admin/reports/upload" enctype="multipart/form-data">
+        <div class="form-group">
+          <label>Patient Name</label>
+          <input type="text" name="patientName" class="form-control" required placeholder="Full name" />
+        </div>
+        <div class="form-group">
+          <label>Mobile Number</label>
+          <input type="tel" name="mobile" class="form-control" required placeholder="10-digit mobile" pattern="[0-9]{10}" />
+        </div>
+        <div class="form-group">
+          <label>Test Name</label>
+          <input type="text" name="testName" class="form-control" required placeholder="e.g. CBC, Thyroid Profile" />
+        </div>
+        <div class="form-group">
+          <label>Report File (PDF)</label>
+          <input type="file" name="report" class="form-control" accept=".pdf" required />
+        </div>
+        <div class="form-group">
+          <label>Notes (optional)</label>
+          <textarea name="notes" class="form-control" placeholder="Any notes for the patient"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary btn-full">Upload Report</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Reports list -->
+  <div class="card">
+    <div class="card-header"><h3>Uploaded Reports (<%= reports.length %>)</h3></div>
+    <div class="card-body">
+      <% if (reports.length === 0) { %>
+      <p style="padding:32px;text-align:center;color:var(--slate)">No reports uploaded yet.</p>
+      <% } %>
+      <% reports.forEach(r => { %>
+      <div style="padding:16px 20px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+        <div>
+          <div style="font-weight:600;font-size:0.88rem"><%= r.patientName %></div>
+          <div style="font-size:0.75rem;color:var(--slate)"><%= r.testName %> · <%= r.mobile %></div>
+          <div style="font-size:0.72rem;color:var(--slate)"><%= new Date(r.uploadedAt).toLocaleString('en-IN') %></div>
+        </div>
+        <div style="display:flex;gap:8px">
+          <a href="/reports/download/<%= r.id %>" class="btn btn-outline btn-sm" target="_blank">View</a>
+          <form method="POST" action="/admin/reports/<%= r.id %>/delete" onsubmit="return confirm('Delete this report?')">
+            <button type="submit" class="btn btn-sm" style="background:rgba(196,30,58,0.1);color:var(--crimson)">Delete</button>
+          </form>
+        </div>
+      </div>
+      <% }) %>
+    </div>
+  </div>
+</div>
+
+<%- include('layout-bottom') %>
